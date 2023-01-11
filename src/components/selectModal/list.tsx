@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { cameraState } from "../../store/location";
+import { cameraState } from "../../store/camera";
 import { selectModalState } from "../../store/selectModal";
 export interface Camera {
   id: number;

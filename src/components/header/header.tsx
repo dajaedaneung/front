@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import { useRecoilState } from "recoil";
 import { selectModalState } from "../../store/selectModal";
-import { cameraState } from "../../store/location";
+import { cameraState } from "../../store/camera";
 const Menu = styled.div`
   display: flex;
   align-items: center;
