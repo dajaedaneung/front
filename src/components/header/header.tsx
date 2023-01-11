@@ -30,6 +30,7 @@ const HeaderBlock = styled.header`
     padding: 0px 30px;
     justify-content: right;
   }
+  background-color: #f5f5f5;
 `;
 const Logo = styled.img``;
 const Header = () => {

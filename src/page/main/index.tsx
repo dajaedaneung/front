@@ -8,6 +8,12 @@ const Contain = styled.div`
   justify-content: center;
   align-items: end;
   background-color: #f5f5f5;
+  @media (max-width: 500px) {
+    .curstate {
+      width: 95%;
+      height: 95%;
+    }
+  }
 `;
 
 const Main = () => {
