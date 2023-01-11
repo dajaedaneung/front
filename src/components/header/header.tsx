@@ -23,7 +23,6 @@ const HeaderBlock = styled.header`
   padding: 0px 100px;
   height: 60px;
   align-items: center;
-  border-bottom: solid 1px #d6d6d6;
   @media (max-width: 580px) {
     .Logo {
       display: none;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { cameraState } from "../../store/location";
-import List, { Camera } from "./list";
+import List, { Camera } from "./List";
 
 const Contain = styled.div`
   position: fixed;
@@ -33,7 +33,7 @@ const SelectModal = () => {
       <ModalContain>
         {camera.id == -1
           ? "확인할 위치를 골라주세요"
-          : `현재위치는 ${camera.name}입니다`}
+          : `현재 선택된 카메라는 ${camera.name}입니다`}
         <List cameraList={cameraList} />
       </ModalContain>
     </Contain>
