@@ -45,7 +45,9 @@ const Header = () => {
       <Menu>
         <Item>기록보기</Item>
         <Item>예측하기</Item>
-        <Button onClick={openModalHandler}>{camera.name}</Button>
+        <Button onClick={openModalHandler}>
+          {selectModal.isOpen ? "선택중" : camera.name}
+        </Button>
       </Menu>
     </HeaderBlock>
   );
