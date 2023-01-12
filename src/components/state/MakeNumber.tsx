@@ -5,7 +5,7 @@ const Num = styled.span`
   font-size: 15em;
   font-style: normal;
   font-weight: 700;
-  color: ${(props) => props.color || "gray"};
+  color: ${(props) => props.color || "#E2E2E2"};
 `;
 const Contain = styled.div`
   .percent {
@@ -21,14 +21,11 @@ interface MakeNumbersProps {
 const MakeNumbers = ({ num, color }: MakeNumbersProps) => {
   const [colorState, setColorState] = useState([true, true, true]);
   useEffect(() => {
-    setColorState([true, true, true]);
-    for (let i = 0; i < 3 - num.toString().length; i++) {
-      setColorState((prev) => {
-        let temp = prev;
-        temp[i] = false;
-        return temp;
-      });
-    }
+    const temp = [true, true, true];
+    const newTemp = temp.map(
+      (item, index) => index >= 3 - num.toString().length
+    );
+    setColorState(newTemp);
   }, [num]);
   return (
     <Contain>

@@ -4,6 +4,7 @@ import MakeNumbers from "./MakeNumber";
 const Contain = styled.div`
   display: flex;
   flex-wrap: wrap;
+  gap: 50px;
 `;
 const FaceImg = styled.img``;
 const Des = styled.div`
