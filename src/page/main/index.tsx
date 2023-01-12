@@ -20,7 +20,7 @@ const getStep = (code: string) => {
   if (code == "NORMAL") return 1;
   if (code == "CAUTION") return 2;
   if (code == "WARNING") return 3;
-  return 0;
+  return -1;
 };
 interface Camera {
   cameraId: number;
@@ -30,9 +30,9 @@ interface Camera {
 const Main = () => {
   const [camera, setCamera] = useRecoilState(cameraState);
   const [data, setData] = useState<Camera>({
-    cameraId: 1,
-    density: 5,
-    code: "NOMAL",
+    cameraId: -1,
+    density: 0,
+    code: "",
   });
   useEffect(() => {
     if (camera.id != -1) {
@@ -47,7 +47,7 @@ const Main = () => {
   const step = getStep(data.code);
   return (
     <Contain>
-      {camera.id != -1 && (
+      {camera.id != -1 && step !== -1 && (
         <Background step={step}>
           <CurState step={step} density={data.density} />
         </Background>

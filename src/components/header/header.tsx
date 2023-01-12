@@ -3,6 +3,7 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import { selectModalState } from "../../store/selectModal";
 import { cameraState } from "../../store/camera";
+import { NavLink } from "react-router-dom";
 const Menu = styled.div`
   display: flex;
   align-items: center;
@@ -12,6 +13,10 @@ const Item = styled.span`
   font-size: 1.8em;
   color: #686868;
   cursor: pointer;
+  a {
+    color: #686868;
+    text-decoration: none;
+  }
 `;
 const HeaderBlock = styled.header`
   display: flex;
@@ -36,9 +41,13 @@ const Header = () => {
   };
   return (
     <HeaderBlock>
-      <Logo src="/images/logo.svg" className="Logo"></Logo>
+      <NavLink to="/">
+        <Logo src="/images/logo.svg" className="Logo"></Logo>
+      </NavLink>
       <Menu>
-        <Item>예측하기</Item>
+        <Item>
+          <NavLink to="/predict">예측하기</NavLink>
+        </Item>
         <Item onClick={openModalHandler}>위치변경</Item>
       </Menu>
     </HeaderBlock>
