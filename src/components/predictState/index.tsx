@@ -10,8 +10,24 @@ import Graph from "../graph";
 import { axisBottom } from "d3";
 import axios from "axios";
 import { baseUrl } from "../../config";
-
-const CurState = ({ step, density }: { step: number; density: number }) => {
+const TimeSelect = styled.div`
+  width: 100%;
+  height: 30%;
+  font-size: 5em;
+`;
+const StateWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+`;
+const Board2 = styled(Board)`
+  justify-content: space-around;
+  padding: 20px 100px;
+`;
+const InputBox = styled.input`
+  height: 40px;
+`;
+const PredictState = ({ step, density }: { step: number; density: number }) => {
   const [camera, setCamera] = useRecoilState(cameraState);
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -24,11 +40,16 @@ const CurState = ({ step, density }: { step: number; density: number }) => {
     }
   }, [camera.id]);
   return (
-    <Board>
-      <State step={step} density={density}></State>
-      <Graph unit="시" step={step} Dot={data} key={camera.id} />
-    </Board>
+    <Board2>
+      <TimeSelect>
+        <InputBox></InputBox>년<InputBox></InputBox>월<InputBox></InputBox>일
+        <InputBox></InputBox>시 쯤에 가도 괜찮을까요?
+      </TimeSelect>
+      <StateWrapper>
+        <State step={step} density={density}></State>
+      </StateWrapper>
+    </Board2>
   );
 };
 
-export default CurState;
+export default PredictState;

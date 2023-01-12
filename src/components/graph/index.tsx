@@ -12,6 +12,8 @@ import {
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
 import { stepList } from "../../config";
+import { useRecoilState } from "recoil";
+import { cameraState } from "../../store/camera";
 
 ChartJS.register(
   CategoryScale,
@@ -71,46 +73,31 @@ interface GraphProps {
   unit: string;
 }
 export default function Graph({ step, Dot, unit }: GraphProps) {
-  const ref = React.useRef<ChartJS>(null);
-  const [xData, setXData] = useState<string[]>([]);
-  const [yData, setYData] = useState<number[]>([]);
-  console.log("dot : ", Dot);
-  useEffect(() => {
-    let x: string[] = [];
-    let y: number[] = [];
-    Dot.forEach((i, idx) => {
-      x.push(i.x + unit);
-      y.push(i.y);
-    });
-    setXData(x);
-    setYData(y);
-  }, [Dot, step, unit]);
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.data.labels = xData;
-      ref.current.data.datasets[0].data = yData;
-      ref.current?.update();
-    }
-  }, [xData, yData, ref]);
-  if (yData.length > 0)
-    return (
-      <Contain onResize={() => ref.current?.resize()}>
-        <Line
-          options={options}
-          data={{
-            labels: xData,
-            datasets: [
-              {
-                label: "Dataset 1",
-                data: yData,
-                borderColor: stepList[step].Color,
-                backgroundColor: "rgba(255, 99, 132, 0.5)",
-              },
-            ],
-          }}
-          ref={ref}
-        />
-      </Contain>
-    );
-  return null;
+  const [cam, _] = useRecoilState(cameraState);
+
+  let x: string[] = [];
+  let y: number[] = [];
+  Dot.forEach((i, idx) => {
+    x.push(i.x + unit);
+    y.push(i.y);
+  });
+
+  return (
+    <Contain>
+      <Line
+        options={options}
+        data={{
+          labels: x,
+          datasets: [
+            {
+              label: "data",
+              data: y,
+              borderColor: stepList[step].Color,
+              backgroundColor: "rgba(255, 99, 132, 0.5)",
+            },
+          ],
+        }}
+      />
+    </Contain>
+  );
 }

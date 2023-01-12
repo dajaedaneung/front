@@ -16,13 +16,31 @@ const Contain = styled.div`
   background: rgba(255, 255, 255, 0.5);
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: 3;
 `;
 const ModalContain = styled.div`
   width: 50%;
   min-width: 300px;
   height: 500px;
-  background-color: yellow;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Now = styled.div`
+  font-size: 2em;
+  border: 1px solid gray;
+  height: 40px;
+  border-radius: 10px;
+  padding: 10px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 2.5em;
+  width: 100%;
+  max-width: 500px;
 `;
 const SelectModal = () => {
   const [camera, setCamera] = useRecoilState(cameraState);
@@ -35,9 +53,9 @@ const SelectModal = () => {
   return (
     <Contain>
       <ModalContain>
-        {camera.id == -1
-          ? "확인할 위치를 골라주세요"
-          : `현재 선택된 카메라는 ${camera.place}입니다`}
+        <Now>
+          {camera.id == -1 ? "확인할 위치를 골라주세요" : `${camera.place}`}
+        </Now>
         <List cameraList={cameraList} />
       </ModalContain>
     </Contain>
