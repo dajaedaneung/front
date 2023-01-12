@@ -1,6 +1,8 @@
+import axios from "axios";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { baseUrl } from "../../config";
 import { cameraState } from "../../store/camera";
 import List, { Camera } from "./List";
 
