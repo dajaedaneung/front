@@ -7,6 +7,8 @@ import axios from "axios";
 import { baseUrl } from "../../config";
 import { useRecoilState } from "recoil";
 import { cameraState } from "../../store/camera";
+import Graph from "../../components/graph";
+
 const Contain = styled.div`
   width: 100%;
   display: flex;
@@ -45,8 +47,11 @@ const Main = () => {
   const step = getStep(data.code);
   return (
     <Contain>
-      {camera.id != -1 && <CurState step={step} density={data.density} />}
-      {camera.id != -1 && <Background step={step} />}
+      {camera.id != -1 && (
+        <Background step={step}>
+          <CurState step={step} density={data.density} />
+        </Background>
+      )}
     </Contain>
   );
 };

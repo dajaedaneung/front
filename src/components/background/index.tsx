@@ -20,24 +20,22 @@ const RightRound = styled.div<{ r: number; x: number; y: number }>`
   right: ${(props) => props.y}px;
 `;
 const Contain = styled.div`
-  position: fixed;
-  left: 0;
-  top: 60px;
-  width: 100%;
-  height: calc(100% - 60px);
-  display: flex;
+  position: relative;
   justify-content: center;
-  align-items: end;
+  width: 100%;
+  display: flex;
   background-color: #f5f5f5;
   overflow: hidden;
+  min-height: calc(100vh - 60px);
 `;
 
 interface BackgroundProps {
   step: number;
+  children: React.ReactNode;
 }
 
 const getColor = () => {};
-const Background = ({ step }: BackgroundProps) => {
+const Background = ({ step, children }: BackgroundProps) => {
   const color = stepList[step].Background;
   return (
     <Contain>
@@ -48,6 +46,7 @@ const Background = ({ step }: BackgroundProps) => {
       <LeftRound color={color} r={200} x={500} y={-50}></LeftRound>
       <RightRound color={color} r={250} x={250} y={0}></RightRound>
       <RightRound color={color} r={200} x={-100} y={-100}></RightRound>
+      {children}
     </Contain>
   );
 };

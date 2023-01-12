@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Board = styled.div`
-  position: fixed;
-  bottom: 0px;
+  margin-top: 70px;
   width: 75%;
   border-radius: 30px 30px 0px 0px;
   background-color: white;
@@ -10,10 +9,8 @@ export const Board = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 70px;
-  padding-bottom: 70px;
   z-index: 1;
   @media (max-width: 500px) {
     width: 90%;
-    height: 75%;
   }
 `;

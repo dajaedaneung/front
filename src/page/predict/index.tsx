@@ -45,12 +45,7 @@ const Predict = () => {
     }
   }, [camera]);
   const step = getStep(data.code);
-  return (
-    <Contain>
-      {camera.id != -1 && <CurState step={step} density={data.density} />}
-      {camera.id != -1 && <Background step={step} />}
-    </Contain>
-  );
+  return <Contain></Contain>;
 };
 
 export default Predict;
