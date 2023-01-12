@@ -4,7 +4,7 @@ import { cameraState } from "../../store/camera";
 import { selectModalState } from "../../store/selectModal";
 export interface Camera {
   id: number;
-  name: string;
+  place: string;
 }
 export interface CameraProps {
   cameraList: Camera[];
@@ -31,7 +31,7 @@ const List = ({ cameraList }: CameraProps) => {
               changeCameraHandler(data);
             }}
           >
-            {data.name}
+            {data.place}
           </div>
         );
       })}

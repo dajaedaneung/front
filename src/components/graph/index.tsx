@@ -31,7 +31,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart.js Line Chart",
+      text: "현재 지역 시간별 인구 밀집도 평균",
     },
   },
   scales: {
@@ -57,6 +57,7 @@ const Contain = styled.div`
   margin-top: 30px;
   height: 100%;
   width: 100%;
+  max-width: 600px;
   display: flex;
   justify-content: center;
 `;
@@ -70,6 +71,7 @@ interface GraphProps {
   unit: string;
 }
 export default function Graph({ step, Dot, unit }: GraphProps) {
+  const ref = React.useRef<ChartJS>(null);
   const [xData, setXData] = useState<string[]>([]);
   const [yData, setYData] = useState<number[]>([]);
   console.log("dot : ", Dot);
@@ -82,21 +84,33 @@ export default function Graph({ step, Dot, unit }: GraphProps) {
     });
     setXData(x);
     setYData(y);
-  }, [Dot]);
-  const data = {
-    labels: xData,
-    datasets: [
-      {
-        label: "Dataset 1",
-        data: yData,
-        borderColor: stepList[step].Color,
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-    ],
-  };
-  return (
-    <Contain>
-      <Line options={options} data={data} />
-    </Contain>
-  );
+  }, [Dot, step, unit]);
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.data.labels = xData;
+      ref.current.data.datasets[0].data = yData;
+      ref.current?.update();
+    }
+  }, [xData, yData, ref]);
+  if (yData.length > 0)
+    return (
+      <Contain onResize={() => ref.current?.resize()}>
+        <Line
+          options={options}
+          data={{
+            labels: xData,
+            datasets: [
+              {
+                label: "Dataset 1",
+                data: yData,
+                borderColor: stepList[step].Color,
+                backgroundColor: "rgba(255, 99, 132, 0.5)",
+              },
+            ],
+          }}
+          ref={ref}
+        />
+      </Contain>
+    );
+  return null;
 }

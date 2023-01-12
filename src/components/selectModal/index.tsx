@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { baseUrl } from "../../config";
@@ -26,17 +26,18 @@ const ModalContain = styled.div`
 `;
 const SelectModal = () => {
   const [camera, setCamera] = useRecoilState(cameraState);
-  const [cameraList, setCameraList] = useState<Camera[]>([
-    { id: 1, name: "카메라1" },
-    { id: 2, name: "카메라2" },
-    { id: 3, name: "카메라3" },
-  ]);
+  const [cameraList, setCameraList] = useState<Camera[]>([]);
+  useEffect(() => {
+    axios.get(baseUrl + "/camera/all").then((data) => {
+      setCameraList(data.data.cameraList);
+    });
+  }, []);
   return (
     <Contain>
       <ModalContain>
         {camera.id == -1
           ? "확인할 위치를 골라주세요"
-          : `현재 선택된 카메라는 ${camera.name}입니다`}
+          : `현재 선택된 카메라는 ${camera.place}입니다`}
         <List cameraList={cameraList} />
       </ModalContain>
     </Contain>
