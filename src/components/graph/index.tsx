@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -70,18 +70,25 @@ interface GraphProps {
   unit: string;
 }
 export default function Graph({ step, Dot, unit }: GraphProps) {
-  let x: string[] = [];
-  let y: number[] = [];
-  Dot.forEach((i, idx) => {
-    x.push(i.x);
-    y.push(i.y);
-  });
+  const [xData, setXData] = useState<string[]>([]);
+  const [yData, setYData] = useState<number[]>([]);
+  console.log("dot : ", Dot);
+  useEffect(() => {
+    let x: string[] = [];
+    let y: number[] = [];
+    Dot.forEach((i, idx) => {
+      x.push(i.x + unit);
+      y.push(i.y);
+    });
+    setXData(x);
+    setYData(y);
+  }, [Dot]);
   const data = {
-    labels: x,
+    labels: xData,
     datasets: [
       {
         label: "Dataset 1",
-        data: y,
+        data: yData,
         borderColor: stepList[step].Color,
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
