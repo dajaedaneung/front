@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import { stepList } from "../../config";
 import MakeNumbers from "./MakeNumber";
 
 const Contain = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 50px;
 `;
 const FaceImg = styled.img``;
@@ -30,12 +32,7 @@ const RightWrapper = styled.div`
     }
   }
 `;
-const Step = [
-  { Color: "#00D1FF", write: "쾌적해요", img: "./images/face/1.png" },
-  { Color: "#FFCE21", write: "괜찮아요", img: "./images/face/2.png" },
-  { Color: "#FF9921", write: "주의하세요", img: "./images/face/3.png" },
-  { Color: "#FF7474", write: "위험해요", img: "./images/face/4.png" },
-];
+
 interface StateProps {
   step: number;
   density: number;
@@ -44,13 +41,13 @@ const State = ({ step, density }: StateProps) => {
   return (
     <Contain>
       <LeftWrapper>
-        <FaceImg src={Step[step].img}></FaceImg>
+        <FaceImg src={stepList[step].img}></FaceImg>
       </LeftWrapper>
       <RightWrapper>
-        <MakeNumbers num={density} color={Step[step].Color} />
-        <Des className="des" color={Step[step].Color}>
-          <span className="first">{Step[step].write.substring(0, 2)}</span>
-          <span>{Step[step].write.substring(2)}</span>
+        <MakeNumbers num={density} color={stepList[step].Color} />
+        <Des className="des" color={stepList[step].Color}>
+          <span className="first">{stepList[step].write.substring(0, 2)}</span>
+          <span>{stepList[step].write.substring(2)}</span>
         </Des>
       </RightWrapper>
     </Contain>

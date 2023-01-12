@@ -7,10 +7,10 @@ import { Board } from "../common/style";
 import State from "../state";
 import MakeNumbers from "../state/MakeNumber";
 
-const CurState = () => {
+const CurState = ({ step, density }: { step: number; density: number }) => {
   return (
     <Board>
-      <State step={0} density={1}></State>
+      <State step={step} density={density}></State>
     </Board>
   );
 };

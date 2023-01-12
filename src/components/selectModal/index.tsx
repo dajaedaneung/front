@@ -14,6 +14,7 @@ const Contain = styled.div`
   background: rgba(255, 255, 255, 0.5);
   width: 100%;
   height: 100%;
+  z-index: 2;
 `;
 const ModalContain = styled.div`
   width: 50%;
