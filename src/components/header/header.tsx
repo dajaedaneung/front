@@ -10,12 +10,8 @@ const Menu = styled.div`
 `;
 const Item = styled.span`
   font-size: 1.8em;
-`;
-const Button = styled(Item)`
-  background-color: #ff5c00;
-  padding: 8px 15px;
-  color: white;
-  border-radius: 10px;
+  color: #686868;
+  cursor: pointer;
 `;
 const HeaderBlock = styled.header`
   display: flex;
@@ -34,20 +30,16 @@ const HeaderBlock = styled.header`
 `;
 const Logo = styled.img``;
 const Header = () => {
-  const [camera, setCamera] = useRecoilState(cameraState);
   const [selectModal, setSelectModal] = useRecoilState(selectModalState);
   const openModalHandler = () => {
     setSelectModal({ isOpen: true });
   };
   return (
     <HeaderBlock>
-      <Logo src="/images/logo.png" className="Logo"></Logo>
+      <Logo src="/images/logo.svg" className="Logo"></Logo>
       <Menu>
-        <Item>기록보기</Item>
         <Item>예측하기</Item>
-        <Button onClick={openModalHandler}>
-          {selectModal.isOpen ? "선택중" : camera.name}
-        </Button>
+        <Item onClick={openModalHandler}>위치변경</Item>
       </Menu>
     </HeaderBlock>
   );
