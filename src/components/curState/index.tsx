@@ -15,16 +15,18 @@ const CurState = ({ step, density }: { step: number; density: number }) => {
   const [camera, setCamera] = useRecoilState(cameraState);
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios
-      .get(baseUrl + "/density?criteria=HOUR&camera=" + camera.id)
-      .then((data) => {
-        setData(data.data);
-      });
-  }, []);
+    if (camera.id) {
+      axios
+        .get(baseUrl + "/density?criteria=HOUR&camera=" + camera.id)
+        .then((data) => {
+          setData(data.data);
+        });
+    }
+  }, [camera.id]);
   return (
     <Board>
       <State step={step} density={density}></State>
-      <Graph unit="시" step={step} Dot={data} />
+      <Graph unit="시" step={step} Dot={data} key={camera.id} />
     </Board>
   );
 };
