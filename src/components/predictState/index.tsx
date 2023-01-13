@@ -13,7 +13,7 @@ import { baseUrl } from "../../config";
 const TimeSelect = styled.div`
   width: 100%;
   height: 30%;
-  font-size: 5em;
+  font-size: 4.9em;
 `;
 const StateWrapper = styled.div`
   width: 100%;
