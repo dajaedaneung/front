@@ -13,7 +13,7 @@ import { baseUrl } from "../../config";
 const TimeSelect = styled.div`
   width: 100%;
   height: 30%;
-  font-size: 5em;
+  font-size: 4.9em;
 `;
 const StateWrapper = styled.div`
   width: 100%;
@@ -27,26 +27,63 @@ const Board2 = styled(Board)`
 const InputBox = styled.input`
   height: 40px;
 `;
+const Result = styled.div`
+  font-size: 4em;
+`;
 const PredictState = ({ step, density }: { step: number; density: number }) => {
   const [camera, setCamera] = useRecoilState(cameraState);
-  const [data, setData] = useState([]);
+  const [year, setYear] = useState("");
+  const [month, setMonth] = useState("");
+  const [day, setDay] = useState("");
+  const [hour, setHour] = useState("");
+  const [p, setP] = useState(-1);
   useEffect(() => {
-    if (camera.id) {
-      axios
-        .get(baseUrl + "/density?criteria=HOUR&camera=" + camera.id)
-        .then((data) => {
-          setData(data.data);
-        });
-    }
-  }, [camera.id]);
+    const url =
+      "localhost:5000/model" +
+      camera.id +
+      "/" +
+      year +
+      "-" +
+      month +
+      "-" +
+      day +
+      " " +
+      hour +
+      ":00:00";
+    axios.get(url).then((data) => {
+      setP(data.data[0][0]);
+    });
+  }, [year, month, day, hour]);
   return (
     <Board2>
       <TimeSelect>
-        <InputBox></InputBox>년<InputBox></InputBox>월<InputBox></InputBox>일
-        <InputBox></InputBox>시 쯤에 가도 괜찮을까요?
+        <InputBox
+          onChange={(e) => {
+            setYear(e.target.value);
+          }}
+        />
+        년
+        <InputBox
+          onChange={(e) => {
+            setMonth(e.target.value);
+          }}
+        />
+        월
+        <InputBox
+          onChange={(e) => {
+            setDay(e.target.value);
+          }}
+        />
+        일
+        <InputBox
+          onChange={(e) => {
+            setHour(e.target.value);
+          }}
+        />
+        시 쯤에 가도 괜찮을까요?
       </TimeSelect>
       <StateWrapper>
-        <State step={step} density={density}></State>
+        <Result>예측되는 사람수는 {p == -1 ? "?" : p}명입니다!!</Result>
       </StateWrapper>
     </Board2>
   );
